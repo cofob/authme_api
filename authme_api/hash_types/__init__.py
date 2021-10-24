@@ -1,0 +1,2 @@
+class HashType:
+    pass
