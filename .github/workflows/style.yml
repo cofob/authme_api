@@ -2,7 +2,6 @@ name: Black style
 
 on:
   push:
-  pull_request:
 
 jobs:
   apply-style:
