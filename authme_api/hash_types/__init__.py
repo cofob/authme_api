@@ -10,7 +10,7 @@ class PasswordHash:
 class HashType:
     @staticmethod
     def process_hash_str(str_hash: str):
-        spl = str_hash.split('$')
+        spl = str_hash.split("$")
         return HashType(spl[2], spl[3])
 
     def hash_password(self, password) -> str:
@@ -32,4 +32,4 @@ class HashType:
         self.hash_str = self.get_hash_str()
 
     def get_hash_str(self, hash_name=None, _hash=None, salt=None) -> str:
-        return f'${self.hash_name if hash_name is None else hash_name}${self._hash.salt if salt is None else salt}${self._hash.hash if _hash is None else _hash}'
+        return f"${self.hash_name if hash_name is None else hash_name}${self._hash.salt if salt is None else salt}${self._hash.hash if _hash is None else _hash}"

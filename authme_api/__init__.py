@@ -4,8 +4,8 @@ from authme_api.hash_types import HashType
 
 
 def find_hash_type(hash_str: str) -> HashType:
-    mapping = {'SHA': SHA256}
-    spl = hash_str.split('$')
+    mapping = {"SHA": SHA256}
+    spl = hash_str.split("$")
     return mapping[spl[1]]
 
 
