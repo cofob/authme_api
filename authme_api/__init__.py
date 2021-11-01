@@ -32,6 +32,8 @@ class AuthMe:
 
     def get_user_by_name(self, name: str):
         with self.db.cursor() as cursor:
-            cursor.execute(f"SELECT * FROM {self.columns.table} WHERE {self.columns.Name} = '{name}'")
+            cursor.execute(
+                f"SELECT * FROM {self.columns.table} WHERE {self.columns.Name} = '{name}'"
+            )
             result = cursor.fetchall()
             print(result)
