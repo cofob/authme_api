@@ -1,6 +1,6 @@
-import mysql.connector
 from authme_api.hash_types.sha256 import SHA256
 from authme_api.hash_types import HashType
+from authme_api.models import *
 
 
 def find_hash_type(hash_str: str) -> HashType:
@@ -12,18 +12,26 @@ def find_hash_type(hash_str: str) -> HashType:
 class AuthMe:
     def __init__(
         self,
-        db_user: str,
-        db_password: str,
-        db_name: str,
-        db_host: str,
-        db_port: int = 3306,
+        database: DB,
         default_hash: HashType = SHA256,
+        columns: Columns = Columns(),
     ):
-        self.db = mysql.connector.connect(
-            host=db_host,
-            user=db_user,
-            password=db_password,
-            database=db_name,
-            port=db_port,
-        )
+        self.db = database.database
         self.default_hash = default_hash
+        self.columns = columns
+        self.model: [str] = []
+        self.describe_table()
+
+    def describe_table(self):
+        with self.db.cursor() as cursor:
+            cursor.execute(f"DESCRIBE {self.columns.table}")
+            result = cursor.fetchall()
+            for i in result:
+                self.model.append(i[0])
+        print(self.model)
+
+    def get_user_by_name(self, name: str):
+        with self.db.cursor() as cursor:
+            cursor.execute(f"SELECT * FROM {self.columns.table} WHERE {self.columns.Name} = '{name}'")
+            result = cursor.fetchall()
+            print(result)

@@ -4,7 +4,6 @@ from authme_api import *
 
 
 def test_sha256_standard_init():
-    # standard initialising
     _hash = SHA256(
         "f9ca496861aeb0266ed5d5637513b1a778ba33f4b8f5eb00ef08ba98be7e3bba", "salt"
     )
@@ -18,7 +17,6 @@ def test_sha256_standard_init():
 
 
 def test_sha256_parsing():
-    # parsing from `password` field
     _hash = SHA256.process_hash_str(
         "$SHA$salt$f9ca496861aeb0266ed5d5637513b1a778ba33f4b8f5eb00ef08ba98be7e3bba"
     )
@@ -32,7 +30,6 @@ def test_sha256_parsing():
 
 
 def test_sha256_password_changing():
-    # password changing
     _hash = SHA256.process_hash_str(
         "$SHA$salt$f9ca496861aeb0266ed5d5637513b1a778ba33f4b8f5eb00ef08ba98be7e3bba"
     )
